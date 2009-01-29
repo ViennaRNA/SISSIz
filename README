@@ -195,10 +195,11 @@ SISSIz --verbose --tstv --precision 0.05 -n 1000 test.aln
 
 SISSIz and the new dinucleotide randomization procedure is described in:
 
-Gesell T and Washietl S 
-Dinucleotide controlled Null models for comparative RNA gene
-prediction, 
-(2008) BMC Bioinformatics, in press
+Gesell T, Washietl S
+Dinucleotide controlled null models for comparative RNA gene
+prediction.
+BMC Bioinformatics. 2008; 9:248
+
 
 The basic idea of calculating stability z-score for multiple
 alignments is described here:
