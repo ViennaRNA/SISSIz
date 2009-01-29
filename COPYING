@@ -1,0 +1,23 @@
+SISSIz 0.1
+
+You can redistribute SISSIz and/or modify it under the terms of the
+GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any
+later version. This software is distributed in the hope that it will
+be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License and http://www.opensource.org for more details.
+
+SISSIz contains parts of other open source software by the authors and
+other people.
+
+- Vienna RNA package by Ivo Hofacker and others (www.tbi.univie.ac.at/~ivo/RNA)
+- RNAz by Stefan Washietl and Ivo Hofacker (www.tbi.univie.ac.at/~wash/RNAz)
+- SISSI by Tanja Gesell and Arndt von Haeseler (http://www.cibiv.at/software/sissi/)
+- PHYML by Stephane Guindon and Olivier Gascuel (http://atgc.lirmm.fr/phyml/)
+- BIONJ by  Olivier Gascuel (http://www.crt.umontreal.ca/~olivierg/bionj.html)
+- seqgen by Andrew Rambaut (http://tree.bio.ed.ac.uk/software/seqgen/)
+
+Please note the licence details of these programs.
+
+

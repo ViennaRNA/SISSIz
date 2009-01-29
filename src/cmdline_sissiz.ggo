@@ -1,0 +1,24 @@
+# gengetopt template file
+# create cmdline_sissiz.h and cmdline_sissiz.c with the following command:
+#
+#gengetopt < cmdline_sissiz.ggo -F cmdline_sissiz --unamed-opts --no-handle-version --no-handle-help --no-handle-error
+
+option      "nossr" r              "No site specific rates"             flag             off
+option      "flanks" f    "Flanking sites"                  int          no
+option      "outfile"     o         "Output filename"       string       no
+option      "num-samples" n         "Number of samples"     int          no
+option      "num-samples-regression"        m  "Number of samples in regression"        int no
+option      "precision"                    p  "Cut-off for mononucleotide content (Euclidean distance of frequency vector)"       double     no
+option      "simulate"                      s  "Simulate only"        flag off
+option      "verbose"                      v  "verbose"        flag off
+option      "mono"                         i  "Mononucleotide" flag off
+option      "di"                         d  "Mononucleotide" flag on
+option      "dna"                        q   "Print Us or Ts" flag on
+option      "rna"                        u  "Print Us or Ts" flag off
+option      "tstv"                         t  "Transition/Transversion ratio" flag on
+option      "kappa"                         k  "kappa parameter" float no
+option      "gamma"                         g  "Categories for gamma for kappa ML estimation"   int     no
+option      "print-rates"                  x  "Print rates to file (debugging)" flag    off
+option      "clustal"                  -  "Output format CLUSTAL W" flag    on
+option      "maf"                  -  "Output format MAF" flag    off
+option      "fasta"                -  "Output format FASTA" flag    off

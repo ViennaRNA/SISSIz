@@ -1,0 +1,1 @@
+- Check rooted tree issue: clearcut returns rooted tree with one branch missing length, is just set to 0.0001 right now

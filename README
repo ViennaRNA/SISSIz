@@ -1,0 +1,233 @@
+SISSIz - Dinucleotide controlled random alignments and RNA gene prediction
+==========================================================================
+
+
+1. DESCRIPTION
+==============
+
+
+SISSIz randomizes multiple sequence alignments preserving the average
+dinucleotide content. It uses a simulation procedure guided by a
+phylogenetic tree.
+
+In combination with the RNAalifold algorithm it can be used to detect
+functional RNA structures in multiple alignments. To this end, SISSIz
+calculates the consensus folding energy of the original data and
+compares it to the expected energy distribution of the random
+alignments. The significance of the prediction is measures as a
+z-score:
+
+    (Native energy) - (Mean random energy)
+z = --------------------------------------
+         Standard dev. random energy
+
+Negative z-scores indicate secondary structures that are more
+conserved/stable than expected by chance. 
+
+
+1. INSTALLATION
+===============
+
+This packages uses the GNU configuration and installation
+system and thus compilation and installation should be easy:
+
+cd /somedir/SISSIz-0.1
+./configure
+make
+make install (as root)
+
+This installs the SISSIz binary into /usr/local/bin and additional
+data files and examples in /usr/local/share/SISSIz.
+
+If you have no root rights on your system or prefer to install SISSIz
+into a self-contained directory run configure for example like this:
+
+./configure --prefix=/opt/programs/SISSIz --datadir=/opt/programs/SISSIz/share
+
+
+2. USAGE
+========
+
+2.1 Input alignment
+-------------------
+
+The input alignment must be in CLUSTAL W format or MAF format.
+
+
+2.2 Program call
+----------------
+
+SISSIz [OPTIONS] [FILE]
+
+2.3 Options
+-----------
+
+Most options have a long (--long) and a short form (-x).
+
+-s, --simulate
+
+This switchtes to "simulation only" mode, i.e no RNA analysis is
+carried out and the alignments is just randomized.
+
+-n, --num-samples
+
+Number of samples that are used for calculating the z-score. In
+simulation mode, the number of random alignments to be
+produced. Default is 100 for z-scores, and 1 for simulations.
+
+-i --mono
+-d --di
+
+Choose between a mononucleotide and dinucleotide background
+model. Default is the dinucleotide model.
+
+-v, --verbose
+
+Produce verbose output that gives an overview of the algorithm,
+intermediate results and statistics. 
+
+-t, --tstv
+
+Use a model that has different rates for transitions and transversions.
+
+-k, --kappa
+
+Set the transition/transversion rate ration parameter for the
+model. If not set, it is estimated from the data. If --tstv not set
+this option can be ignored.
+
+-p, --precision
+
+Limit the deviation of the mononucleotide content in the simulated
+alignments. The value given here is the maximum Euclidian distance
+between the mononucleotide frequencies in the original alignment and
+the simulated alignment. In other word, it is the square-root of the
+sum of the squared differences between the four frequencies of As, Cs,
+Ts, and Gs. For example if you set to 0.01 you will get almost exactly
+the same monunucleotide content in the simulations as in the original
+alignment. This makes it slower but more accurate.
+
+-m, --num-regression
+
+Pairwise alignments of 25 different distances are simulated to
+estimate the relationship between observed and genetic distances. For
+each of these points the average of X samples is used, where X is the
+number given here. Default is 10.
+
+-f, --flanks
+
+In most cases you can ignore this option. In the algorithm additional
+sites are used as "buffer sites" to overcome problems with saturation
+of mutations that make it impossible to estimate distances. Default is
+1.5 x (number of sites in original alignment). If your simulation
+fails because of a negative logorithm you can raise this value.
+
+--dna --rna
+
+Use T or U in the output alignments. Default is --dna, i.e Ts are
+printed.
+
+--clustal --maf 
+
+Output alignment format, either CLUSTAL W format (default) or MAF
+format. Only relevant in simulation mode (--simulate).
+
+-h --help
+
+Print short overview of options.
+
+-V --version
+
+Print version information.
+
+
+
+2.4 Output
+----------
+
+In simulation mode one or more alignmnts in CLUSTAL W or MAF format
+are printed.
+
+If --verbose is given lots of additional information is given (these
+lines start with a # so that they can be filtered easily).
+
+When calculating z-scores the results are given in one tab separated
+line:
+
+1. Model name (either "sissiz-mono" or "sissiz-di")
+2. Name of the input file name. 
+3. Number of sequences in the input alignment
+4. Mean pairwise identity (MPI) of the input alignment
+5. Average MPI of the sampled alignments.
+6. Standard deviation of the MPIs of the sampled alignments.
+7. RNAalifold consensus Minimum free energy (MFE) of the original alignment.
+8. Average consensus MFE in the sampled alignments
+9. Standard deviation of the consensus MFE in the sampled algnments
+10. z-score calculated from 7. 8. and 9.
+
+
+3. EXAMPLES
+===========
+
+SISSIz --simulate --tstv -n 1000 test.aln
+
+  Simulate 1000 random alignments with the same average dinucleotide
+  content and a transition/transversion model.
+
+SISSIz --simulate --mono --tstv -n 1000 test.aln
+
+  The same as above with mononucleotide model.
+
+
+SISSIz --verbose --simulate --mono --tstv -n 1000 test.aln
+
+  The same as above, but show detailed results.
+
+
+SISSIz --verbose --tstv --precision 0.05 -n 1000 test.aln
+
+  Calculate z-score with a sample size of 1000. Slowest but most
+  accurate settings.
+
+
+4. LITERATURE
+=============
+
+SISSIz and the new dinucleotide randomization procedure is described in:
+
+Gesell T and Washietl S 
+Dinucleotide controlled Null models for comparative RNA gene
+prediction, 
+(2008) BMC Bioinformatics, in press
+
+The basic idea of calculating stability z-score for multiple
+alignments is described here:
+
+Washietl S and Hofacker IL 
+Consensus folding of aligned sequences as a new measure for the
+detection of functional RNAs by comparative genomics.  
+J Mol Biol (2004) 342:19-30.
+
+The theoretical foundations for the simulation Model is described
+here:
+
+Gesell T and von Haeseler A 
+In silico sequence evolution with site-specific interactions along
+phylogenetic trees.  
+Bioinformatics (2006) 22:716-22.
+
+The RNAalifold algorithm is described here:
+
+Hofacker IL, Fekete M, Stadler PF
+Secondary structure prediction for aligned RNA sequences.
+J Mol Biol (2002) 319:1059-66. 
+
+
+5. CONTACT
+==========
+
+Stefan Washietl <wash@tbi.univie.ac.at>
+
+Tanja Gesell <tanja.gesell@univie.ac.at>
+
+
