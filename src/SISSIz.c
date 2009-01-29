@@ -100,7 +100,7 @@ int main(int argc, char *argv[]){
   FILE *outputFile=stdout;
   FILE *dest=stdout;
   FILE *rateFile;
-
+  FILE *treeFile; 
   
   int (*readFunction)(FILE *clust,struct aln *alignedSeqs[]);
   struct gengetopt_args_info args;
@@ -118,6 +118,7 @@ int main(int argc, char *argv[]){
   int verbose=0;
   int mono=0;
   int printRates=0;
+  int printTree=0; 
   int printU=0;
   int outputFormat=0;
   int regressionSampleSize=10;
@@ -243,6 +244,7 @@ int main(int argc, char *argv[]){
     exit(EXIT_SUCCESS);
   }
 
+
   if (args.print_rates_given){
     printRates=1;
     rateFile=fopen("rates.dat","w");
@@ -252,6 +254,19 @@ int main(int argc, char *argv[]){
       exit(1);
     }
   }
+
+  if (args.print_tree_given){    
+    printTree=1;
+    treeFile=fopen("aln.tree","w");
+    
+    if (treeFile==NULL){
+      fprintf(stderr,"Could not write tree output.");
+      exit(1);
+    }
+  }
+
+
+
 
   if (args.tstv_given){
     tstvModel=1;
@@ -696,6 +711,8 @@ int main(int argc, char *argv[]){
       bbionj(treeString,(const struct aln**)inputAln,distMatrix);
 
       if (verbose) fprintf(dest, "\n# BIONJ-Tree\n\n# %s\n\n",treeString);
+
+      if (printTree) fprintf(treeFile, "%s\n\n",treeString); 
 
       tree=treeFromString(treeString);
 
@@ -1579,6 +1596,7 @@ void help(void){
   printf("%s\n","  --maf                UCSC style MAF");
   printf("%s\n","  --fasta              Multiple FASTA separated by //");
   printf("%s\n","  -o, --outfile        Output file (default destination: stdout)");
+  printf("%s\n","  -b, --print-tree     Print BIONJ-Tree to aln.tree");
   printf("%s\n","  -x, --print-rates    Print rates to rates.dat (debugging)");
   printf("%s\n","  -h, --help           Help screen");
   printf("%s\n\n","  -V, --version        Print version");

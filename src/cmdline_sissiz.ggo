@@ -18,6 +18,7 @@ option      "rna"                        u  "Print Us or Ts" flag off
 option      "tstv"                         t  "Transition/Transversion ratio" flag on
 option      "kappa"                         k  "kappa parameter" float no
 option      "gamma"                         g  "Categories for gamma for kappa ML estimation"   int     no
+option      "print-tree"                  b  "Print estimated tree " flag    off
 option      "print-rates"                  x  "Print rates to file (debugging)" flag    off
 option      "clustal"                  -  "Output format CLUSTAL W" flag    on
 option      "maf"                  -  "Output format MAF" flag    off
