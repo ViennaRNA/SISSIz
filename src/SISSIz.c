@@ -673,12 +673,12 @@ int main(int argc, char *argv[]){
           }
     
           if (p>=parB){
-            fprintf(stderr,"ERROR: Negative logarithm while generating distance matrix.\n");
-            fprintf(stderr,"       Try again with --flanks set to a higher value (currently --flanks=%i)\n",mockSize);
-            exit(1);
-          }
+            fprintf(stderr,"WARNING: Negative logarithm while generating distance matrix.\n");
+            d=9.0;
 
-          d=(1/parA)*log(1-(1/parB)*p);
+          } else {
+            d=(1/parA)*log(1-(1/parB)*p);
+          }
     
           distMatrix[i*N+j]=d; /* distMatrix is in fact a one dimensonal array */
         }
