@@ -1,4 +1,4 @@
-AC_INIT(SISSIz, 0.1, wash@tbi.univie.ac.at, SISSIz)
+AC_INIT(SISSIz, 0.1.1, wash@tbi.univie.ac.at, SISSIz)
 AM_INIT_AUTOMAKE
 
 AC_PROG_CC
