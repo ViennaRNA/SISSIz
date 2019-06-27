@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "expfit.h"
+#include "utils.h"
 #include "lm.h"
 
 void expFunction (double *parVector, double *xVector, int m, int n, void *adat);
