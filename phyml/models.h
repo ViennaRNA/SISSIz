@@ -10,8 +10,8 @@ the GNU public licence.  See http://www.opensource.org for details.
 
 */
 
-#ifndef MODELS_H
-#define MODELS_H
+#ifndef PHYML_MODELS_H
+#define PHYML_MODELS_H
 
 void  PMat(phydbl l, model *mod, double ***Pij);
 void  PMat_K80(phydbl l,phydbl kappa, double ***Pij);
